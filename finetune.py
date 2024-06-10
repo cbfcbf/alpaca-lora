@@ -1,5 +1,5 @@
 # BASE_MODEL='baffo32/decapoda-research-llama-7B-hf'
-
+# python finetune.py     --base_model 'baffo32/decapoda-research-llama-7B-hf'     --data_path 'yahma/alpaca-cleaned'     --output_dir './lora-alpaca'
 
 import os
 import sys
