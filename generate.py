@@ -1,3 +1,5 @@
+# BASE_MODEL='huggyllama/llama-7b'
+# LORA_WEIGHT="tloen/alpaca-lora-7b"
 import os
 import sys
 

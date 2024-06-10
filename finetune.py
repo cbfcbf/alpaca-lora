@@ -1,3 +1,6 @@
+# BASE_MODEL='baffo32/decapoda-research-llama-7B-hf'
+
+
 import os
 import sys
 from typing import List
@@ -121,7 +124,7 @@ def train(
     tokenizer.pad_token_id = (
         0  # unk. we want this to be different from the eos token
     )
-    
+
     tokenizer.padding_side = "left"  # Allow batched inference
 
     def tokenize(prompt, add_eos_token=True):
