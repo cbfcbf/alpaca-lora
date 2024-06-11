@@ -39,7 +39,7 @@ def train(
     num_epochs: int = 3,
     learning_rate: float = 3e-4,
     cutoff_len: int = 256,
-    val_set_size: int = 2000,
+    val_set_size: int = 20, # !!
     # lora hyperparams
     lora_r: int = 8,
     lora_alpha: int = 16,
@@ -219,7 +219,7 @@ def train(
             test_size=val_set_size, shuffle=True, seed=42
         )
         train_data = (
-            train_val["train"].shuffle().map(generate_and_tokenize_prompt)
+            train_val["train"].shuffle().select(range(200)).map(generate_and_tokenize_prompt)
         )
         val_data = (
             train_val["test"].shuffle().map(generate_and_tokenize_prompt)
