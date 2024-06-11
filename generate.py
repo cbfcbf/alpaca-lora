@@ -1,5 +1,9 @@
 # BASE_MODEL='huggyllama/llama-7b'
 # LORA_WEIGHT="tloen/alpaca-lora-7b"
+
+# python generate.py  --load_8bit  --base_model 'decapoda-research/llama-7b-hf'  --lora_weights 'tloen/alpaca-lora-7b'
+
+
 import os
 import sys
 
