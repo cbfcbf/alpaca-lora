@@ -171,3 +171,97 @@
 
 
 
+
+
+
+
+ 73%|████████████████████████████████████████████████████████████████████▌                         | 140/192 [37:42<12:25, 14.34s/it]
+ 50%|█████████████████████████████████████████████████                                                 | 2/4 [00:00<00:00,  4.52it/s]
+  warnings.warn(
+/root/miniconda3/lib/python3.8/site-packages/bitsandbytes/autograd/_functions.py:316: UserWarning: MatMul8bitLt: inputs will be cast from torch.float32 to float16 during quantization
+  warnings.warn(f"MatMul8bitLt: inputs will be cast from {A.dtype} to float16 during quantization")
+{'eval_loss': 0.8571768403053284, 'eval_runtime': 1.7512, 'eval_samples_per_second': 18.273, 'eval_steps_per_second': 2.284, 'epoch': 2.19}
+
+
+
+
+
+
+
+
+
+ 78%|█████████████████████████████████████████████████████████████████████████▍                    | 150/192 [40:30<11:39, 16.66s/it]
+
+
+
+
+
+
+
+
+
+ 83%|██████████████████████████████████████████████████████████████████████████████▎               | 160/192 [43:20<11:16, 21.13s/it]
+ 50%|█████████████████████████████████████████████████                                                 | 2/4 [00:00<00:00,  4.76it/s]
+{'loss': 0.9003, 'grad_norm': 0.28797265887260437, 'learning_rate': 6.263736263736263e-05, 'epoch': 2.5}
+  warnings.warn(
+/root/miniconda3/lib/python3.8/site-packages/bitsandbytes/autograd/_functions.py:316: UserWarning: MatMul8bitLt: inputs will be cast from torch.float32 to float16 during quantization
+  warnings.warn(f"MatMul8bitLt: inputs will be cast from {A.dtype} to float16 during quantization")
+
+
+
+
+
+
+
+
+
+ 89%|███████████████████████████████████████████████████████████████████████████████████▏          | 170/192 [45:33<04:59, 13.63s/it]
+
+
+
+
+
+
+
+
+
+ 93%|███████████████████████████████████████████████████████████████████████████████████████▋      | 179/192 [48:02<02:56, 13.55s/it]
+ 94%|████████████████████████████████████████████████████████████████████████████████████████▏     | 180/192 [48:15<02:40, 13.33s/it]
+  0%|                                                                                                          | 0/4 [00:00<?, ?it/s]
+  warnings.warn(
+/root/miniconda3/lib/python3.8/site-packages/bitsandbytes/autograd/_functions.py:316: UserWarning: MatMul8bitLt: inputs will be cast from torch.float32 to float16 during quantization
+  warnings.warn(f"MatMul8bitLt: inputs will be cast from {A.dtype} to float16 during quantization")
+
+
+
+
+
+
+
+
+ 98%|████████████████████████████████████████████████████████████████████████████████████████████▌ | 189/192 [50:48<00:42, 14.31s/it]
+
+
+100%|██████████████████████████████████████████████████████████████████████████████████████████████| 192/192 [51:28<00:00, 13.63s/it]Traceback (most recent call last):
+  File "finetune.py", line 288, in <module>
+    if __name__ == "__main__":
+  File "/root/miniconda3/lib/python3.8/site-packages/fire/core.py", line 143, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+  File "/root/miniconda3/lib/python3.8/site-packages/fire/core.py", line 477, in _Fire
+    component, remaining_args = _CallAndUpdateTrace(
+  File "/root/miniconda3/lib/python3.8/site-packages/fire/core.py", line 693, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+  File "finetune.py", line 278, in train
+  File "/root/miniconda3/lib/python3.8/site-packages/transformers/trainer.py", line 1885, in train
+    return inner_training_loop(
+  File "/root/miniconda3/lib/python3.8/site-packages/transformers/trainer.py", line 2339, in _inner_training_loop
+    self._load_best_model()
+  File "/root/miniconda3/lib/python3.8/site-packages/transformers/trainer.py", line 2636, in _load_best_model
+    model.load_adapter(self.state.best_model_checkpoint, active_adapter)
+  File "/root/miniconda3/lib/python3.8/site-packages/peft/peft_model.py", line 1014, in load_adapter
+    adapters_weights = load_peft_weights(model_id, device=torch_device, **hf_hub_download_kwargs)
+  File "/root/miniconda3/lib/python3.8/site-packages/peft/utils/save_and_load.py", line 475, in load_peft_weights
+    adapters_weights = safe_load_file(filename, device=device)
+  File "/root/miniconda3/lib/python3.8/site-packages/safetensors/torch.py", line 311, in load_file
+    with safe_open(filename, framework="pt", device=device) as f:
+safetensors_rust.SafetensorError: Error while deserializing header: InvalidHeaderDeserialization
