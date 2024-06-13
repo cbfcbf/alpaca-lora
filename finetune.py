@@ -252,6 +252,7 @@ def train(
             eval_steps=20 if val_set_size > 0 else None,
             save_steps=20,
             output_dir=output_dir,
+            logging_dir='./logs'
             save_total_limit=3,
             load_best_model_at_end=True if val_set_size > 0 else False,
             ddp_find_unused_parameters=False if ddp else None,
