@@ -27,14 +27,14 @@ from transformers import LlamaForCausalLM, LlamaTokenizer
 
 from utils.prompter import Prompter
 
-
+select_num=2047
 def train(
     # model/data params
     base_model: str = "",  # the only required argument
     data_path: str = "yahma/alpaca-cleaned",
     output_dir: str = "./lora-alpaca",
     # training hyperparams
-    batch_size: int = 128,
+    batch_size: int = 32,
     micro_batch_size: int = 4,
     num_epochs: int = 3,
     learning_rate: float = 3e-4,
@@ -57,7 +57,8 @@ def train(
     wandb_run_name: str = "test",
     wandb_watch: str = "all",  # options: false | gradients | all
     wandb_log_model: str = "true",  # options: false | true
-    resume_from_checkpoint: str = None,  # either training checkpoint or final adapter
+    resume_from_checkpoint: str = False,  # either training checkpoint or final adapter
+
     prompt_template_name: str = "alpaca",  # The prompt template to use, will default to alpaca.
 ):
     if int(os.environ.get("LOCAL_RANK", 0)) == 0:
@@ -156,7 +157,7 @@ def train(
             data_point["output"],
         )
         tokenized_full_prompt = tokenize(full_prompt)
-        if not train_on_inputs:
+        if not train_on_inputs:  #为什么？？
             user_prompt = prompter.generate_prompt(
                 data_point["instruction"], data_point["input"]
             )
@@ -219,7 +220,7 @@ def train(
             test_size=val_set_size, shuffle=True, seed=42
         )
         train_data = (
-            train_val["train"].shuffle().select(range(200)).map(generate_and_tokenize_prompt)
+            train_val["train"].shuffle().select(range(select_num)).map(generate_and_tokenize_prompt)
         )
         val_data = (
             train_val["test"].shuffle().map(generate_and_tokenize_prompt)
@@ -240,7 +241,7 @@ def train(
         args=transformers.TrainingArguments(
             per_device_train_batch_size=micro_batch_size,
             gradient_accumulation_steps=gradient_accumulation_steps,
-            warmup_steps=100,
+            warmup_steps=10,
             num_train_epochs=num_epochs,
             learning_rate=learning_rate,
             fp16=True,
@@ -248,8 +249,8 @@ def train(
             optim="adamw_torch",
             evaluation_strategy="steps" if val_set_size > 0 else "no",
             save_strategy="steps",
-            eval_steps=200 if val_set_size > 0 else None,
-            save_steps=200,
+            eval_steps=20 if val_set_size > 0 else None,
+            save_steps=20,
             output_dir=output_dir,
             save_total_limit=3,
             load_best_model_at_end=True if val_set_size > 0 else False,
